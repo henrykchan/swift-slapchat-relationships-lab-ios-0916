@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
-class TableViewController: UITableViewController {
+class MessageTableViewController: UITableViewController {
     
     var store = DataStore.sharedInstance
+   var messages = [Message]()
+    var recipient : Recipient?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       self.messages = recipient?.messages?.allObjects as! [Message]
+        
         store.fetchData()
     }
     
@@ -32,7 +37,7 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return store.messages.count
     }
 
@@ -46,5 +51,10 @@ class TableViewController: UITableViewController {
 
         return cell
     }
+    
+    
+    
+    
+
     
 }

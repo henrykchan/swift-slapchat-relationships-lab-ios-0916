@@ -12,6 +12,7 @@ import CoreData
 class DataStore {
     
     var messages:[Message] = []
+    var recipients:[Recipient] = []
     
     static let sharedInstance = DataStore()
     
@@ -66,6 +67,19 @@ class DataStore {
     
     func fetchData() {
         let context = persistentContainer.viewContext
+        
+        
+        let recipientRequest: NSFetchRequest<Recipient> = Recipient.fetchRequest()
+        do
+        {
+            recipients = try context.fetch(recipientRequest)
+        } catch let error {
+            print("Error fetching data: \(error)")
+            recipients = []
+        }
+        
+        
+        
         let messagesRequest: NSFetchRequest<Message> = Message.fetchRequest()
         
         do {
@@ -105,8 +119,36 @@ class DataStore {
         messageThree.content = "Message 3"
         messageThree.createdAt = NSDate()
         
+        let recipientOne: Recipient = NSEntityDescription.insertNewObject(forEntityName: "Recipient", into: context) as! Recipient
+        recipientOne.name = "Recipient 1"
+        recipientOne.email = "recipient1 email"
+        recipientOne.phoneNumber = "1111111111"
+        
+        let recipientTwo: Recipient = NSEntityDescription.insertNewObject(forEntityName: "Recipient", into: context) as! Recipient
+        recipientTwo.name = "Recipient 2"
+        recipientTwo.email = "recipient1 email2"
+        recipientTwo.phoneNumber = "11111111112222"
+        
+        let recipientThree: Recipient = NSEntityDescription.insertNewObject(forEntityName: "Recipient", into: context) as! Recipient
+        recipientThree.name = "Recipient 3"
+        recipientThree.email = "recipient1 email3"
+        recipientThree.phoneNumber = "11111111113333"
+        
+//        recipients.append(recipientOne)
+//        recipients.append(recipientTwo)
+//        recipients.append(recipientThree)
+        
         saveContext()
         fetchData()
     }
+    
+    
+
+    
+   
+
+    
+    
+    
     
 }
