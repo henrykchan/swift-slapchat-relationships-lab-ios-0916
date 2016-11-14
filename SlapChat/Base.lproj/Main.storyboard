@@ -102,7 +102,7 @@
                     <navigationItem key="navigationItem" id="hPh-B6-6eu">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="SYd-iy-GQY">
                             <connections>
-                                <segue destination="o7X-q2-Eqs" kind="presentation" id="Lbo-YO-tXG"/>
+                                <segue destination="o7X-q2-Eqs" kind="presentation" identifier="addMessage" id="Lbo-YO-tXG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -128,7 +128,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="XAu-n2-nEF" kind="show" identifier="RecipientSegue" id="nUa-c1-A2v"/>
+                                    <segue destination="XAu-n2-nEF" kind="show" identifier="recipientSegue" id="nUa-c1-A2v"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

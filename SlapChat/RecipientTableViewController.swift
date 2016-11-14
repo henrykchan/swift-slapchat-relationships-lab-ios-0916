@@ -12,17 +12,16 @@ import CoreData
 class RecipientTableViewController: UITableViewController {
     
     var store = DataStore.sharedInstance
-    var recipientArray = [Recipient]()
+ 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.recipientArray = store.recipients
-        store.fetchData()
-        print("This is teh arrayyyyy \(store.recipients.count)")
-        print ("This is the messagessss!!!!! \(store.messages.count)")
-        self.tableView.reloadData()
-
    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        store.fetchData()
+        self.tableView.reloadData()
     }
 
  
@@ -42,34 +41,30 @@ class RecipientTableViewController: UITableViewController {
         let theRecipient = store.recipients[indexPath.row]
             cell.textLabel?.text = theRecipient.name
         
-        
-        if let messageCount = theRecipient.messages?.count{
-            cell.detailTextLabel?.text = "\(messageCount)"
-            
-        }
         return cell
     }
     
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let indexPath = tableView.indexPathForSelectedRow
-        
-        let selectedRecipient = store.recipients[(indexPath?.row)!]
-        
-        let destinationVC = segue.destination as! MessageTableViewController
-        destinationVC.recipient = selectedRecipient
-     
+        if segue.identifier == "recipientSegue" {
+    
+            let destinationVC = segue.destination as! MessageTableViewController
+            guard let indexPath = self.tableView.indexPathForSelectedRow?.row else { return }
+            
+            destinationVC.recipient = self.store.recipients[indexPath]
+            
+            
             
         }
     }
-    
-    
-  
-    
-    
-    
-    
+}
+
+
+
+
+
     
     
     

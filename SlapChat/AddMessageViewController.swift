@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 
 class AddMessageViewController: UIViewController {
+    
+    var recipient: Recipient?
 
     @IBOutlet weak var addMessageTextField: UITextField!
     
@@ -24,6 +26,10 @@ class AddMessageViewController: UIViewController {
         let newMessage = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
         newMessage.content = addMessageTextField.text
         newMessage.createdAt = NSDate()
+        
+        //add message to recipient
+        recipient?.addToMessages(newMessage)
+        
         store.saveContext()
         dismiss(animated: true, completion: nil)
     }
@@ -32,4 +38,6 @@ class AddMessageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 }
+
+
 

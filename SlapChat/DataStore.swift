@@ -77,6 +77,9 @@ class DataStore {
             print("Error fetching data: \(error)")
             recipients = []
         }
+        if recipients.count == 0 {
+            generateTestData()
+        }
         
         
         
@@ -134,9 +137,9 @@ class DataStore {
         recipientThree.email = "recipient1 email3"
         recipientThree.phoneNumber = "11111111113333"
         
-//        recipients.append(recipientOne)
-//        recipients.append(recipientTwo)
-//        recipients.append(recipientThree)
+        recipientOne.addToMessages(messageOne)
+        recipientTwo.addToMessages(messageTwo)
+        recipientThree.addToMessages(messageThree)
         
         saveContext()
         fetchData()
